@@ -64,6 +64,21 @@ const adminNav: NavItem[] = [
   { label: 'Laporan', href: '/admin/reports', icon: <TrendingUp className="h-4 w-4" /> },
 ];
 
+function getRoleFromPathname(pathname: string): UserRole | null {
+  if (pathname.startsWith('/industry')) return 'industry';
+  if (pathname.startsWith('/agent')) return 'agent';
+  if (pathname.startsWith('/community')) return 'community';
+  if (pathname.startsWith('/admin')) return 'admin';
+  return null;
+}
+
+const defaultRoleInfo: Record<UserRole, { name: string; company?: string }> = {
+  industry: { name: 'PT Geothermal Demo', company: 'PT Geothermal Demo' },
+  agent: { name: 'Pak Rahman (Agen Demo)', company: 'Desa Kamojang' },
+  community: { name: 'Andi Pratama (Demo)' },
+  admin: { name: 'Admin Platform' },
+};
+
 function getNavItems(role: UserRole | null): NavItem[] {
   switch (role) {
     case 'industry': return industryNav;
@@ -96,9 +111,21 @@ function getRoleColor(role: UserRole | null): string {
 
 export function Sidebar() {
   const pathname = usePathname();
-  const { currentRole, userName, companyName, sidebarOpen, setSidebarOpen, logout } = useAppStore();
+  const { currentRole, userName, companyName, sidebarOpen, setSidebarOpen, logout, setRole } = useAppStore();
 
-  const navItems = getNavItems(currentRole);
+  const inferredRole = getRoleFromPathname(pathname);
+  const effectiveRole = currentRole || inferredRole || 'industry';
+  const effectiveName = userName || (inferredRole ? defaultRoleInfo[inferredRole].name : 'PT Geothermal Demo');
+  const effectiveCompany = companyName || (inferredRole ? defaultRoleInfo[inferredRole].company : '');
+
+  // Auto-restore role if store is empty on direct URL visit or after tab reload
+  useEffect(() => {
+    if (inferredRole && !currentRole) {
+      setRole(inferredRole, defaultRoleInfo[inferredRole].name, defaultRoleInfo[inferredRole].company);
+    }
+  }, [inferredRole, currentRole, setRole]);
+
+  const navItems = getNavItems(effectiveRole);
 
   // Automatically close sidebar on mobile when navigating or on initial mobile load
   useEffect(() => {
@@ -181,23 +208,23 @@ export function Sidebar() {
         </div>
 
         {/* User info */}
-        {currentRole && (
+        {effectiveRole && (
           <div className={cn('px-4 py-3 border-b border-white/10 shrink-0', !sidebarOpen && 'lg:hidden')}>
             <div className="flex items-center gap-2.5">
               <div className="w-8 h-8 rounded-full bg-emerald-600 flex items-center justify-center shrink-0">
                 <span className="text-white text-xs font-bold">
-                  {userName ? userName.charAt(0).toUpperCase() : 'U'}
+                  {effectiveName ? effectiveName.charAt(0).toUpperCase() : 'U'}
                 </span>
               </div>
               <div className="overflow-hidden min-w-0">
-                <div className="text-white text-sm font-medium truncate">{userName}</div>
-                <span className={cn('text-xs px-1.5 py-0.5 rounded-full font-medium inline-block mt-0.5', getRoleColor(currentRole))}>
-                  {getRoleLabel(currentRole)}
+                <div className="text-white text-sm font-medium truncate">{effectiveName}</div>
+                <span className={cn('text-xs px-1.5 py-0.5 rounded-full font-medium inline-block mt-0.5', getRoleColor(effectiveRole))}>
+                  {getRoleLabel(effectiveRole)}
                 </span>
               </div>
             </div>
-            {companyName && (
-              <div className="mt-2 text-gray-400 text-xs truncate">{companyName}</div>
+            {effectiveCompany && (
+              <div className="mt-2 text-gray-400 text-xs truncate">{effectiveCompany}</div>
             )}
           </div>
         )}
