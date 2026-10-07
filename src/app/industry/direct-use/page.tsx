@@ -42,12 +42,14 @@ export default function DirectUsePage() {
   return (
     <DashboardLayout title="Direct-Use Geothermal">
       <div className="space-y-6">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">Peluang Direct-Use Geothermal</h1>
-            <p className="text-gray-500 mt-1">Identifikasi pemanfaatan langsung panas bumi untuk masyarakat sekitar.</p>
+            <h1 className="text-xl sm:text-2xl font-bold text-gray-900">Peluang Direct-Use Geothermal</h1>
+            <p className="text-xs sm:text-sm text-gray-500 mt-1">Identifikasi pemanfaatan langsung panas bumi untuk masyarakat sekitar.</p>
           </div>
-          <DemoBadge />
+          <div className="self-start">
+            <DemoBadge />
+          </div>
         </div>
 
         {/* Demo Warning */}

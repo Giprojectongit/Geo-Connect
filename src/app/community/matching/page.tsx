@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 export const dynamic = 'force-dynamic';
 
@@ -18,12 +18,14 @@ export default function CommunityMatchingPage() {
     <DashboardLayout title="Matching Peluang">
       <div className="space-y-6">
         {/* Header */}
-        <div className="flex items-start justify-between">
+        <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">Rekomendasi untuk Anda</h1>
-            <p className="text-gray-500 mt-1">Peluang yang paling sesuai berdasarkan profil, skill, dan lokasi Anda.</p>
+            <h1 className="text-xl sm:text-2xl font-bold text-gray-900">Rekomendasi untuk Anda</h1>
+            <p className="text-xs sm:text-sm text-gray-500 mt-1">Peluang yang paling sesuai berdasarkan profil, skill, dan lokasi Anda.</p>
           </div>
-          <DemoBadge />
+          <div className="self-start">
+            <DemoBadge />
+          </div>
         </div>
 
         {/* Info notice */}

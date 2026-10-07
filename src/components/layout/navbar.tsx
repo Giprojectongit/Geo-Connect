@@ -21,19 +21,20 @@ export function TopNav({ title }: TopNavProps) {
   const userNotifications = mockNotifications.filter(n => !n.read).slice(0, 5);
 
   return (
-    <header className="sticky top-0 z-20 bg-white border-b border-gray-200 h-14 flex items-center px-4 gap-3">
+    <header className="sticky top-0 z-30 bg-white border-b border-gray-200 h-14 flex items-center px-3 sm:px-4 gap-2 sm:gap-3 shrink-0">
       {/* Mobile hamburger */}
       <button
-        onClick={() => setSidebarOpen(!sidebarOpen)}
-        className="lg:hidden text-gray-500 hover:text-gray-700"
+        onClick={() => setSidebarOpen(true)}
+        className="lg:hidden p-2 rounded-lg text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors shrink-0"
+        aria-label="Buka menu"
       >
         <Menu className="h-5 w-5" />
       </button>
 
       {/* Title */}
       {title && (
-        <div className="hidden md:block">
-          <h1 className="text-base font-semibold text-gray-800">{title}</h1>
+        <div className="min-w-0">
+          <h1 className="text-sm sm:text-base font-semibold text-gray-800 truncate max-w-35 sm:max-w-none">{title}</h1>
         </div>
       )}
 
@@ -41,7 +42,7 @@ export function TopNav({ title }: TopNavProps) {
       <div className="flex-1" />
 
       {/* Demo badge */}
-      <span className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-amber-50 text-amber-700 border border-amber-200">
+      <span className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-amber-50 text-amber-700 border border-amber-200 shrink-0">
         <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
         Mode Demo
       </span>
@@ -54,8 +55,8 @@ export function TopNav({ title }: TopNavProps) {
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Cari peluang, program..."
-              className="w-60 px-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              placeholder="Cari peluang..."
+              className="w-36 sm:w-60 px-3 py-1.5 text-xs sm:text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 shadow-xs"
               autoFocus
               onBlur={() => { if (!searchQuery) setShowSearch(false); }}
             />
@@ -64,6 +65,7 @@ export function TopNav({ title }: TopNavProps) {
           <button
             onClick={() => setShowSearch(true)}
             className="p-2 rounded-lg text-gray-500 hover:bg-gray-100 hover:text-gray-700 transition-colors"
+            aria-label="Cari"
           >
             <Search className="h-4.5 w-4.5" />
           </button>
@@ -75,6 +77,7 @@ export function TopNav({ title }: TopNavProps) {
         <button
           onClick={() => setShowNotifications(!showNotifications)}
           className="relative p-2 rounded-lg text-gray-500 hover:bg-gray-100 hover:text-gray-700 transition-colors"
+          aria-label="Notifikasi"
         >
           <Bell className="h-4.5 w-4.5" />
           {notifications > 0 && (
@@ -85,7 +88,7 @@ export function TopNav({ title }: TopNavProps) {
         </button>
 
         {showNotifications && (
-          <div className="absolute right-0 top-full mt-1 w-80 bg-white border border-gray-200 rounded-xl shadow-lg z-50">
+          <div className="absolute right-0 top-full mt-2 w-[calc(100vw-2rem)] sm:w-80 max-w-sm bg-white border border-gray-200 rounded-xl shadow-xl z-50">
             <div className="px-4 py-3 border-b border-gray-100 flex items-center justify-between">
               <span className="font-semibold text-gray-800 text-sm">Notifikasi</span>
               <button

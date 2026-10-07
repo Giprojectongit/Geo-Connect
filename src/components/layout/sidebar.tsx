@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import {
@@ -100,63 +100,98 @@ export function Sidebar() {
 
   const navItems = getNavItems(currentRole);
 
+  // Automatically close sidebar on mobile when navigating or on initial mobile load
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 1024) {
+        setSidebarOpen(false);
+      }
+    };
+    if (window.innerWidth < 1024) {
+      setSidebarOpen(false);
+    }
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [setSidebarOpen]);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.innerWidth < 1024) {
+      setSidebarOpen(false);
+    }
+  }, [pathname, setSidebarOpen]);
+
+  const handleLinkClick = () => {
+    if (typeof window !== 'undefined' && window.innerWidth < 1024) {
+      setSidebarOpen(false);
+    }
+  };
+
   return (
     <>
-      {/* Mobile overlay */}
-      {sidebarOpen && (
-        <div
-          className="fixed inset-0 bg-black/40 z-30 lg:hidden"
-          onClick={() => setSidebarOpen(false)}
-        />
-      )}
+      {/* Mobile backdrop overlay */}
+      <div
+        className={cn(
+          'fixed inset-0 bg-black/60 backdrop-blur-xs z-40 lg:hidden transition-opacity duration-300',
+          sidebarOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+        )}
+        onClick={() => setSidebarOpen(false)}
+        aria-hidden="true"
+      />
 
-      {/* Sidebar */}
+      {/* Sidebar drawer */}
       <aside
         className={cn(
-          'fixed left-0 top-0 bottom-0 z-40 flex flex-col bg-[#111b14] transition-all duration-300',
-          sidebarOpen ? 'w-60' : 'w-16',
-          'lg:relative lg:flex'
+          // Base styles
+          'fixed inset-y-0 left-0 z-50 flex flex-col bg-[#111b14] transition-all duration-300 ease-in-out',
+          // Mobile (<lg): Off-screen drawer when closed, slide in when open
+          'w-64 max-w-[85vw] shadow-2xl',
+          sidebarOpen ? 'translate-x-0' : '-translate-x-full',
+          // Desktop (lg+): In normal page layout flow, never translated off-screen
+          'lg:static lg:translate-x-0 lg:z-auto lg:shadow-none',
+          sidebarOpen ? 'lg:w-60' : 'lg:w-16'
         )}
       >
-        {/* Logo */}
-        <div className="flex items-center gap-3 px-4 py-5 border-b border-white/10">
+        {/* Logo & Close / Collapse Toggle */}
+        <div className="flex items-center gap-3 px-4 py-5 border-b border-white/10 shrink-0">
           <div className="w-8 h-8 rounded-lg bg-emerald-500 flex items-center justify-center shrink-0">
             <Zap className="h-4 w-4 text-white" />
           </div>
-          {sidebarOpen && (
-            <div className="overflow-hidden">
-              <div className="text-white font-bold text-sm leading-tight whitespace-nowrap">
-                Geo Connect
-              </div>
-              <div className="text-emerald-400 text-xs whitespace-nowrap">Community Hub</div>
+          <div className={cn('overflow-hidden', !sidebarOpen && 'lg:hidden')}>
+            <div className="text-white font-bold text-sm leading-tight whitespace-nowrap">
+              Geo Connect
             </div>
-          )}
+            <div className="text-emerald-400 text-xs whitespace-nowrap">Community Hub</div>
+          </div>
+          {/* Desktop collapse toggle */}
           <button
             onClick={() => setSidebarOpen(!sidebarOpen)}
-            className="ml-auto text-gray-400 hover:text-white transition-colors lg:block hidden"
+            className="ml-auto text-gray-400 hover:text-white transition-colors lg:block hidden p-1 rounded-md hover:bg-white/5"
+            aria-label="Toggle sidebar"
           >
             {sidebarOpen ? <ChevronLeft className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
           </button>
+          {/* Mobile close button */}
           <button
             onClick={() => setSidebarOpen(false)}
-            className="ml-auto text-gray-400 hover:text-white transition-colors lg:hidden"
+            className="ml-auto text-gray-400 hover:text-white transition-colors lg:hidden p-1 rounded-md hover:bg-white/10"
+            aria-label="Tutup menu"
           >
-            <X className="h-4 w-4" />
+            <X className="h-5 w-5" />
           </button>
         </div>
 
         {/* User info */}
-        {sidebarOpen && currentRole && (
-          <div className="px-4 py-3 border-b border-white/10">
+        {currentRole && (
+          <div className={cn('px-4 py-3 border-b border-white/10 shrink-0', !sidebarOpen && 'lg:hidden')}>
             <div className="flex items-center gap-2.5">
               <div className="w-8 h-8 rounded-full bg-emerald-600 flex items-center justify-center shrink-0">
                 <span className="text-white text-xs font-bold">
-                  {userName.charAt(0).toUpperCase()}
+                  {userName ? userName.charAt(0).toUpperCase() : 'U'}
                 </span>
               </div>
-              <div className="overflow-hidden">
+              <div className="overflow-hidden min-w-0">
                 <div className="text-white text-sm font-medium truncate">{userName}</div>
-                <span className={cn('text-xs px-1.5 py-0.5 rounded-full font-medium', getRoleColor(currentRole))}>
+                <span className={cn('text-xs px-1.5 py-0.5 rounded-full font-medium inline-block mt-0.5', getRoleColor(currentRole))}>
                   {getRoleLabel(currentRole)}
                 </span>
               </div>
@@ -169,17 +204,18 @@ export function Sidebar() {
 
         {/* Nav items */}
         <nav className="flex-1 px-2 py-4 overflow-y-auto">
-          <div className="space-y-0.5">
+          <div className="space-y-1">
             {navItems.map((item) => {
               const isActive = pathname === item.href || pathname.startsWith(item.href + '/');
               return (
                 <Link
                   key={item.href}
                   href={item.href}
+                  onClick={handleLinkClick}
                   className={cn(
-                    'flex items-center gap-3 px-3 py-2 rounded-lg transition-all duration-150 group',
+                    'flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-150 group',
                     isActive
-                      ? 'bg-emerald-600 text-white'
+                      ? 'bg-emerald-600 text-white font-medium shadow-xs'
                       : 'text-gray-400 hover:bg-white/10 hover:text-white'
                   )}
                   title={!sidebarOpen ? item.label : undefined}
@@ -190,9 +226,9 @@ export function Sidebar() {
                   )}>
                     {item.icon}
                   </span>
-                  {sidebarOpen && (
-                    <span className="text-sm font-medium whitespace-nowrap">{item.label}</span>
-                  )}
+                  <span className={cn('text-sm font-medium whitespace-nowrap', !sidebarOpen && 'lg:hidden')}>
+                    {item.label}
+                  </span>
                 </Link>
               );
             })}
@@ -200,15 +236,18 @@ export function Sidebar() {
         </nav>
 
         {/* Logout */}
-        <div className="px-2 py-3 border-t border-white/10">
+        <div className="px-2 py-3 border-t border-white/10 shrink-0">
           <Link
             href="/login"
-            onClick={logout}
-            className="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-400 hover:bg-white/10 hover:text-white transition-all duration-150 w-full"
+            onClick={() => {
+              logout();
+              handleLinkClick();
+            }}
+            className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-400 hover:bg-white/10 hover:text-white transition-all duration-150 w-full"
             title={!sidebarOpen ? 'Keluar' : undefined}
           >
             <LogOut className="h-4 w-4 shrink-0" />
-            {sidebarOpen && <span className="text-sm font-medium">Keluar</span>}
+            <span className={cn('text-sm font-medium', !sidebarOpen && 'lg:hidden')}>Keluar</span>
           </Link>
         </div>
       </aside>

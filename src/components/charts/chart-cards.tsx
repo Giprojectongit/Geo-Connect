@@ -20,12 +20,12 @@ export function ChartCard({ title, subtitle, children, showDemoBadge = true, cla
   return (
     <Card className={className}>
       <CardHeader>
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
           <div>
-            <h3 className="font-semibold text-gray-800">{title}</h3>
+            <h3 className="font-semibold text-gray-800 text-sm sm:text-base">{title}</h3>
             {subtitle && <p className="text-xs text-gray-500 mt-0.5">{subtitle}</p>}
           </div>
-          {showDemoBadge && <DemoBadge />}
+          {showDemoBadge && <div className="self-start sm:self-auto"><DemoBadge /></div>}
         </div>
       </CardHeader>
       <CardContent>

@@ -32,16 +32,18 @@ export default function AdminDashboard() {
   return (
     <DashboardLayout>
       <div className="space-y-6">
-        <div className="flex items-start justify-between">
+        <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">Admin Dashboard</h1>
-            <p className="text-gray-500 mt-1">Overview platform dan moderasi konten.</p>
+            <h1 className="text-xl sm:text-2xl font-bold text-gray-900">Admin Dashboard</h1>
+            <p className="text-xs sm:text-sm text-gray-500 mt-1">Overview platform dan moderasi konten.</p>
           </div>
-          <DemoBadge />
+          <div className="self-start">
+            <DemoBadge />
+          </div>
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
           <StatCard label="Total Industri" value={mockAdminStats.totalIndustries} icon={<Building2 className="h-5 w-5" />} change={1} changeType="increase" color="green" />
           <StatCard label="Total Anggota" value={mockAdminStats.totalCommunityMembers} icon={<Users className="h-5 w-5" />} change={mockAdminStats.monthlyGrowth.members} changeType="increase" color="teal" />
           <StatCard label="Total Peluang" value={mockAdminStats.totalOpportunities} icon={<Briefcase className="h-5 w-5" />} change={mockAdminStats.monthlyGrowth.opportunities} changeType="increase" color="teal" />

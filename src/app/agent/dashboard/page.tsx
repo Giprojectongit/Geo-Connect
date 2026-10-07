@@ -17,16 +17,18 @@ export default function AgentDashboard() {
   return (
     <DashboardLayout>
       <div className="space-y-6">
-        <div className="flex items-start justify-between">
+        <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">Dashboard Community Agent</h1>
-            <p className="text-gray-500 mt-1">Kelola anggota komunitas dan bantu mereka menemukan peluang terbaik.</p>
+            <h1 className="text-xl sm:text-2xl font-bold text-gray-900">Dashboard Community Agent</h1>
+            <p className="text-xs sm:text-sm text-gray-500 mt-1">Kelola anggota komunitas dan bantu mereka menemukan peluang terbaik.</p>
           </div>
-          <DemoBadge />
+          <div className="self-start">
+            <DemoBadge />
+          </div>
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
           <StatCard label="Anggota Komunitas" value={myMembers.length} icon={<Users className="h-5 w-5" />} change={8} changeType="increase" color="green" />
           <StatCard label="Peluang Aktif" value="18" icon={<TrendingUp className="h-5 w-5" />} change={3} changeType="increase" color="teal" />
           <StatCard label="Program Pelatihan" value={mockTrainings.filter(t => t.status !== 'completed').length} icon={<BookOpen className="h-5 w-5" />} color="teal" />

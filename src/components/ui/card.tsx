@@ -23,7 +23,7 @@ export function Card({ children, className, hover = false, ...props }: CardProps
 
 export function CardHeader({ children, className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
   return (
-    <div className={cn('px-6 py-4 border-b border-gray-100', className)} {...props}>
+    <div className={cn('px-4 py-3.5 sm:px-6 sm:py-4 border-b border-gray-100', className)} {...props}>
       {children}
     </div>
   );
@@ -31,7 +31,7 @@ export function CardHeader({ children, className, ...props }: React.HTMLAttribut
 
 export function CardContent({ children, className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
   return (
-    <div className={cn('px-6 py-4', className)} {...props}>
+    <div className={cn('px-4 py-3.5 sm:px-6 sm:py-4', className)} {...props}>
       {children}
     </div>
   );
@@ -39,7 +39,7 @@ export function CardContent({ children, className, ...props }: React.HTMLAttribu
 
 export function CardFooter({ children, className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
   return (
-    <div className={cn('px-6 py-4 border-t border-gray-100', className)} {...props}>
+    <div className={cn('px-4 py-3.5 sm:px-6 sm:py-4 border-t border-gray-100', className)} {...props}>
       {children}
     </div>
   );
@@ -74,19 +74,19 @@ export function StatCard({
   };
 
   return (
-    <Card className={cn('p-5', className)}>
-      <div className="flex items-start justify-between">
-        <div className="flex-1">
-          <p className="text-sm text-gray-500 font-medium">{label}</p>
-          <p className="text-2xl font-bold text-gray-900 mt-1">{value}</p>
+    <Card className={cn('p-3.5 sm:p-5', className)}>
+      <div className="flex items-start justify-between gap-2">
+        <div className="flex-1 min-w-0">
+          <p className="text-xs sm:text-sm text-gray-500 font-medium truncate">{label}</p>
+          <p className="text-xl sm:text-2xl font-bold text-gray-900 mt-0.5 sm:mt-1">{value}</p>
           {description && (
-            <p className="text-xs text-gray-400 mt-0.5">{description}</p>
+            <p className="text-[11px] sm:text-xs text-gray-400 mt-0.5 truncate">{description}</p>
           )}
           {change !== undefined && (
-            <div className="flex items-center mt-2 gap-1">
+            <div className="flex items-center mt-1.5 sm:mt-2 gap-1 flex-wrap">
               <span
                 className={cn(
-                  'text-xs font-medium',
+                  'text-[11px] sm:text-xs font-medium',
                   changeType === 'increase' && 'text-emerald-600',
                   changeType === 'decrease' && 'text-red-500',
                   changeType === 'neutral' && 'text-gray-500'
@@ -94,12 +94,12 @@ export function StatCard({
               >
                 {changeType === 'increase' && '↑ '}
                 {changeType === 'decrease' && '↓ '}
-                {change > 0 ? '+' : ''}{change}% bulan ini
+                {change > 0 ? '+' : ''}{change}% <span className="hidden sm:inline">bulan ini</span>
               </span>
             </div>
           )}
         </div>
-        <div className={cn('p-2.5 rounded-lg', colorMap[color])}>
+        <div className={cn('p-2 sm:p-2.5 rounded-lg shrink-0', colorMap[color])}>
           {icon}
         </div>
       </div>

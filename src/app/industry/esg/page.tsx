@@ -20,16 +20,16 @@ export default function ESGDashboardPage() {
     <DashboardLayout title="ESG Impact Dashboard">
       <div className="space-y-6">
         {/* Header */}
-        <div className="flex items-start justify-between">
+        <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">ESG Impact Dashboard</h1>
-            <p className="text-gray-500 mt-1">
+            <h1 className="text-xl sm:text-2xl font-bold text-gray-900">ESG Impact Dashboard</h1>
+            <p className="text-xs sm:text-sm text-gray-500 mt-1">
               Monitoring dampak sosial, ekonomi, dan energi program komunitas. Periode: {metric.period}
             </p>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3">
             <DemoBadge />
-            <Button variant="outline">
+            <Button variant="outline" size="sm">
               <Download className="h-4 w-4" /> Export ESG Report (Demo)
             </Button>
           </div>

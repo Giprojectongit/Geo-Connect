@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 export const dynamic = 'force-dynamic';
 
@@ -43,14 +43,14 @@ export default function IndustryJobsPage() {
   return (
     <DashboardLayout title="Manajemen Lowongan">
       <div className="space-y-6">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">Lowongan Kerja</h1>
-            <p className="text-gray-500 mt-1">Kelola dan pantau semua lowongan aktif perusahaan Anda.</p>
+            <h1 className="text-xl sm:text-2xl font-bold text-gray-900">Lowongan Kerja</h1>
+            <p className="text-xs sm:text-sm text-gray-500 mt-1">Kelola dan pantau semua lowongan aktif perusahaan Anda.</p>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3">
             <DemoBadge />
-            <Button onClick={() => setShowCreateModal(true)}>
+            <Button onClick={() => setShowCreateModal(true)} size="sm">
               <Plus className="h-4 w-4" /> Buat Lowongan
             </Button>
           </div>
