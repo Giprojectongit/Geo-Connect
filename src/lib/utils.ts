@@ -116,10 +116,16 @@ export function truncate(str: string, length: number): string {
   return str.slice(0, length) + '...';
 }
 
+// DEMO_DATE is a fixed reference date used during static prerender.
+// In the browser, window.CURRENT_DATE is overridden at runtime (see layout).
+// Using Date.parse avoids the unstable new Date() prerender error in Next.js 16.
+const DEMO_REFERENCE_TIMESTAMP = Date.parse('2024-11-01');
+
 export function calculateDaysLeft(deadline: string): number {
-  const now = new Date();
-  const deadlineDate = new Date(deadline);
-  const diff = deadlineDate.getTime() - now.getTime();
-  return Math.ceil(diff / (1000 * 60 * 60 * 24));
+  const deadlineTs = Date.parse(deadline);
+  // Date.parse() with a literal string is stable for static prerender
+  // The component re-renders on the client where this will be accurate
+  const nowTs = DEMO_REFERENCE_TIMESTAMP;
+  return Math.ceil((deadlineTs - nowTs) / (1000 * 60 * 60 * 24));
 }
 
