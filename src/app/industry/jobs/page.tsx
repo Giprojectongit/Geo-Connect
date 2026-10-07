@@ -1,4 +1,6 @@
-'use client';
+﻿'use client';
+
+export const dynamic = 'force-dynamic';
 
 import React, { useState } from 'react';
 import { Plus, Filter } from 'lucide-react';
@@ -128,7 +130,7 @@ export default function IndustryJobsPage() {
                   <textarea rows={3} className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500" placeholder="Deskripsi posisi..." />
                 </div>
                 <div className="p-3 bg-amber-50 border border-amber-200 rounded-lg">
-                  <p className="text-xs text-amber-700">⚠️ Fitur create adalah simulasi UI. Data tidak akan tersimpan ke database pada versi MVP ini.</p>
+                  <p className="text-xs text-amber-700">âš ï¸ Fitur create adalah simulasi UI. Data tidak akan tersimpan ke database pada versi MVP ini.</p>
                 </div>
               </div>
               <div className="flex gap-3 mt-5">

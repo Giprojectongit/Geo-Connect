@@ -1,4 +1,6 @@
-'use client';
+﻿'use client';
+
+export const dynamic = 'force-dynamic';
 import React from 'react';
 import { DashboardLayout } from '@/components/layout/dashboard-layout';
 import { DemoBadge, StatusBadge, SkillTag } from '@/components/ui/badges';
@@ -44,7 +46,7 @@ export default function CommunityInternshipsPage() {
                 </div>
                 {int.allowance && (
                   <div className="mt-3 text-xs text-amber-600 bg-amber-50 border border-amber-200 rounded px-2 py-1">
-                    💰 Uang saku (simulasi): {int.allowance}
+                    ðŸ’° Uang saku (simulasi): {int.allowance}
                   </div>
                 )}
                 <div className="mt-4 pt-3 border-t border-gray-100">

@@ -1,4 +1,6 @@
-'use client';
+﻿'use client';
+
+export const dynamic = 'force-dynamic';
 
 import React from 'react';
 import { Users, Briefcase, BookOpen, TrendingUp, ArrowRight, Building2, CheckCircle, Network } from 'lucide-react';
@@ -164,7 +166,7 @@ export default function IndustryDashboard() {
                 ))}
                 <Link href="/industry/jobs">
                   <Button variant="ghost" size="sm" className="w-full text-emerald-600 hover:text-emerald-700">
-                    Kelola Semua Lowongan →
+                    Kelola Semua Lowongan â†’
                   </Button>
                 </Link>
               </CardContent>

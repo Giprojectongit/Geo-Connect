@@ -1,4 +1,6 @@
-'use client';
+﻿'use client';
+
+export const dynamic = 'force-dynamic';
 import React, { useState } from 'react';
 import { DashboardLayout } from '@/components/layout/dashboard-layout';
 import { JobCard } from '@/components/opportunities/opportunity-cards';

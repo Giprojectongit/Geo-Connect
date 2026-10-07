@@ -1,4 +1,6 @@
-'use client';
+﻿'use client';
+
+export const dynamic = 'force-dynamic';
 
 import React from 'react';
 import Link from 'next/link';
@@ -44,7 +46,7 @@ export default function CommunityDashboard() {
             </div>
             <Link href="/community/profile">
               <p className="text-emerald-200 text-xs mt-2 hover:text-white cursor-pointer">
-                Lengkapi profil untuk meningkatkan peluang match →
+                Lengkapi profil untuk meningkatkan peluang match â†’
               </p>
             </Link>
           </div>
@@ -91,7 +93,7 @@ export default function CommunityDashboard() {
             <h2 className="font-bold text-gray-800">Lowongan yang Cocok untuk Anda</h2>
             <Link href="/community/jobs">
               <span className="text-sm text-emerald-600 hover:text-emerald-700 font-medium cursor-pointer">
-                Lihat Semua →
+                Lihat Semua â†’
               </span>
             </Link>
           </div>
@@ -114,7 +116,7 @@ export default function CommunityDashboard() {
           <div className="flex items-center justify-between mb-4">
             <h2 className="font-bold text-gray-800">Pelatihan Tersedia</h2>
             <Link href="/community/training">
-              <span className="text-sm text-emerald-600 hover:text-emerald-700 font-medium cursor-pointer">Lihat Semua →</span>
+              <span className="text-sm text-emerald-600 hover:text-emerald-700 font-medium cursor-pointer">Lihat Semua â†’</span>
             </Link>
           </div>
           <div className="grid md:grid-cols-2 gap-4">

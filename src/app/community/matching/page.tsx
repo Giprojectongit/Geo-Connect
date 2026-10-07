@@ -1,4 +1,6 @@
-'use client';
+﻿'use client';
+
+export const dynamic = 'force-dynamic';
 
 import React from 'react';
 import { Info } from 'lucide-react';
@@ -31,7 +33,7 @@ export default function CommunityMatchingPage() {
             <p className="text-blue-800 font-semibold text-sm">Opportunity Matching Engine (Simulasi)</p>
             <p className="text-blue-700 text-sm mt-0.5">
               Skor matching dihitung berdasarkan kesesuaian skill, lokasi, dan minat pada profil Anda.
-              Ini adalah algoritma berbasis aturan sederhana untuk keperluan MVP demo — bukan AI/ML.
+              Ini adalah algoritma berbasis aturan sederhana untuk keperluan MVP demo â€” bukan AI/ML.
             </p>
           </div>
         </div>
