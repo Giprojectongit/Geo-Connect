@@ -1,10 +1,10 @@
-# Geothermal Community Hub — MVP Demo
+# Geo Connect — Geothermal Community Hub (MVP Demo)
 
 > ⚠️ **Disclaimer**: Platform ini adalah **MVP/Prototype** untuk keperluan **business plan competition**. Semua data adalah simulasi. Tidak ada data nyata, pengguna nyata, atau kerja sama dengan perusahaan geothermal manapun.
 
 ## 🌋 Tentang Platform
 
-**Geothermal Community Hub** adalah platform digital yang menghubungkan operator/industri geothermal dengan masyarakat lokal melalui tiga fungsi utama:
+**Geo Connect** (Geothermal Community Hub) adalah platform digital yang menghubungkan operator/industri geothermal dengan masyarakat lokal melalui tiga fungsi utama:
 
 | Fungsi | Deskripsi |
 |--------|-----------|

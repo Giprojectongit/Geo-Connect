@@ -9,9 +9,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: 'Geothermal Community Hub - Connecting Energy with Communities',
+  title: 'Geo Connect - Connecting Geothermal Energy with Communities',
   description: 'Platform digital yang menghubungkan kebutuhan industri geothermal dengan potensi masyarakat lokal melalui peluang kerja, pelatihan, bisnis, supplier, dan pemanfaatan langsung panas bumi.',
-  keywords: ['geothermal', 'komunitas', 'energi terbarukan', 'peluang kerja', 'ESG', 'community hub'],
+  keywords: ['geo connect', 'geoconnect', 'geothermal', 'komunitas', 'energi terbarukan', 'peluang kerja', 'ESG', 'community hub'],
 };
 
 export default function RootLayout({

@@ -126,7 +126,7 @@ export function Sidebar() {
           {sidebarOpen && (
             <div className="overflow-hidden">
               <div className="text-white font-bold text-sm leading-tight whitespace-nowrap">
-                Geothermal
+                Geo Connect
               </div>
               <div className="text-emerald-400 text-xs whitespace-nowrap">Community Hub</div>
             </div>

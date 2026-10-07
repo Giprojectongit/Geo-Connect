@@ -30,8 +30,7 @@ export default function LandingPage() {
           </div>
 
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6">
-            Geothermal
-            <span className="block text-emerald-400">Community Hub</span>
+            Geo <span className="text-emerald-400">Connect</span>
           </h1>
 
           <p className="text-xl text-gray-400 font-medium mb-3">
@@ -185,7 +184,7 @@ export default function LandingPage() {
               <div className="bg-linear-to-r from-emerald-900/60 to-teal-900/60 border border-emerald-600/40 rounded-2xl px-10 py-5 text-center my-2">
                 <div className="flex items-center gap-2 justify-center mb-1">
                   <Zap className="h-5 w-5 text-emerald-400" />
-                  <span className="text-white font-bold text-lg">Geothermal Community Hub</span>
+                  <span className="text-white font-bold text-lg">Geo Connect</span>
                 </div>
                 <div className="text-emerald-400 text-sm">CONNECT · MATCH · MEASURE</div>
               </div>
@@ -337,7 +336,7 @@ export default function LandingPage() {
             Bukan Sekadar Job Portal
           </h2>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto mb-10">
-            Geothermal Community Hub adalah platform layanan yang mengintegrasikan talent matching,
+            Geo Connect adalah platform layanan yang mengintegrasikan talent matching,
             supplier network, direct-use opportunities, dan ESG reporting dalam satu ekosistem digital.
           </p>
 
@@ -402,12 +401,12 @@ export default function LandingPage() {
               <Zap className="h-3.5 w-3.5 text-white" />
             </div>
             <div>
-              <div className="text-white font-bold text-sm">Geothermal Community Hub</div>
+              <div className="text-white font-bold text-sm">Geo Connect</div>
               <div className="text-gray-500 text-xs">MVP · Business Plan Competition Demo</div>
             </div>
           </div>
           <div className="text-gray-600 text-xs text-center">
-            © 2024 Geothermal Community Hub · Semua data adalah simulasi · Prototype untuk demonstrasi konsep
+            © 2024 Geo Connect · Semua data adalah simulasi · Prototype untuk demonstrasi konsep
           </div>
         </div>
       </footer>

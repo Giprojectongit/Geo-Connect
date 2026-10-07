@@ -155,7 +155,7 @@ export function PublicNav() {
               <Zap className="h-4 w-4 text-white" />
             </div>
             <div>
-              <div className="text-white font-bold text-sm leading-tight">Geothermal</div>
+              <div className="text-white font-bold text-sm leading-tight">Geo Connect</div>
               <div className="text-emerald-400 text-xs">Community Hub</div>
             </div>
           </Link>

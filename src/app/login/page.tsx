@@ -67,7 +67,7 @@ export default function LoginPage() {
             <Zap className="h-4 w-4 text-white" />
           </div>
           <div>
-            <div className="text-white font-bold text-sm">Geothermal Community Hub</div>
+            <div className="text-white font-bold text-sm">Geo Connect</div>
             <div className="text-emerald-400 text-xs">MVP Demo · Simulasi</div>
           </div>
         </div>
