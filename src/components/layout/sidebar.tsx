@@ -1,0 +1,217 @@
+'use client';
+
+import React from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import {
+  LayoutDashboard, Users, Briefcase, GraduationCap, BookOpen,
+  ShoppingBag, Zap, Globe, BarChart3, Settings, ChevronLeft,
+  ChevronRight, X, ClipboardList, Building2, FileText, LogOut,
+  Network, UserCheck, TrendingUp
+} from 'lucide-react';
+import { cn } from '@/lib/utils';
+import { useAppStore } from '@/lib/store';
+import type { UserRole } from '@/types';
+
+interface NavItem {
+  label: string;
+  href: string;
+  icon: React.ReactNode;
+}
+
+const industryNav: NavItem[] = [
+  { label: 'Dashboard', href: '/industry/dashboard', icon: <LayoutDashboard className="h-4 w-4" /> },
+  { label: 'Talent Pool', href: '/industry/talent', icon: <Users className="h-4 w-4" /> },
+  { label: 'Lowongan', href: '/industry/jobs', icon: <Briefcase className="h-4 w-4" /> },
+  { label: 'Internship', href: '/industry/internships', icon: <GraduationCap className="h-4 w-4" /> },
+  { label: 'Training', href: '/industry/training', icon: <BookOpen className="h-4 w-4" /> },
+  { label: 'Supplier Lokal', href: '/industry/suppliers', icon: <ShoppingBag className="h-4 w-4" /> },
+  { label: 'Direct-Use', href: '/industry/direct-use', icon: <Zap className="h-4 w-4" /> },
+  { label: 'Program Komunitas', href: '/industry/community-programs', icon: <Globe className="h-4 w-4" /> },
+  { label: 'ESG Impact', href: '/industry/esg', icon: <BarChart3 className="h-4 w-4" /> },
+  { label: 'Pengaturan', href: '/industry/settings', icon: <Settings className="h-4 w-4" /> },
+];
+
+const agentNav: NavItem[] = [
+  { label: 'Dashboard', href: '/agent/dashboard', icon: <LayoutDashboard className="h-4 w-4" /> },
+  { label: 'Anggota', href: '/agent/members', icon: <Users className="h-4 w-4" /> },
+  { label: 'Lowongan', href: '/agent/jobs', icon: <Briefcase className="h-4 w-4" /> },
+  { label: 'Pelatihan', href: '/agent/training', icon: <BookOpen className="h-4 w-4" /> },
+  { label: 'Peluang Bisnis', href: '/agent/business', icon: <ShoppingBag className="h-4 w-4" /> },
+  { label: 'Supplier', href: '/agent/suppliers', icon: <Building2 className="h-4 w-4" /> },
+  { label: 'Direct-Use', href: '/agent/direct-use', icon: <Zap className="h-4 w-4" /> },
+  { label: 'Penempatan', href: '/agent/placements', icon: <UserCheck className="h-4 w-4" /> },
+  { label: 'Laporan', href: '/agent/reports', icon: <FileText className="h-4 w-4" /> },
+];
+
+const communityNav: NavItem[] = [
+  { label: 'Beranda', href: '/community/dashboard', icon: <LayoutDashboard className="h-4 w-4" /> },
+  { label: 'Peluang Kerja', href: '/community/jobs', icon: <Briefcase className="h-4 w-4" /> },
+  { label: 'Pelatihan', href: '/community/training', icon: <BookOpen className="h-4 w-4" /> },
+  { label: 'Magang', href: '/community/internships', icon: <GraduationCap className="h-4 w-4" /> },
+  { label: 'Peluang Usaha', href: '/community/business', icon: <ShoppingBag className="h-4 w-4" /> },
+  { label: 'Matching', href: '/community/matching', icon: <Network className="h-4 w-4" /> },
+  { label: 'Profil Saya', href: '/community/profile', icon: <Settings className="h-4 w-4" /> },
+];
+
+const adminNav: NavItem[] = [
+  { label: 'Dashboard', href: '/admin/dashboard', icon: <LayoutDashboard className="h-4 w-4" /> },
+  { label: 'Industri', href: '/admin/industries', icon: <Building2 className="h-4 w-4" /> },
+  { label: 'Masyarakat', href: '/admin/members', icon: <Users className="h-4 w-4" /> },
+  { label: 'Peluang', href: '/admin/opportunities', icon: <Briefcase className="h-4 w-4" /> },
+  { label: 'Program', href: '/admin/programs', icon: <Globe className="h-4 w-4" /> },
+  { label: 'Moderasi', href: '/admin/moderation', icon: <ClipboardList className="h-4 w-4" /> },
+  { label: 'Laporan', href: '/admin/reports', icon: <TrendingUp className="h-4 w-4" /> },
+];
+
+function getNavItems(role: UserRole | null): NavItem[] {
+  switch (role) {
+    case 'industry': return industryNav;
+    case 'agent': return agentNav;
+    case 'community': return communityNav;
+    case 'admin': return adminNav;
+    default: return [];
+  }
+}
+
+function getRoleLabel(role: UserRole | null): string {
+  switch (role) {
+    case 'industry': return 'Industri Geothermal';
+    case 'agent': return 'Community Agent';
+    case 'community': return 'Masyarakat';
+    case 'admin': return 'Administrator';
+    default: return '';
+  }
+}
+
+function getRoleColor(role: UserRole | null): string {
+  switch (role) {
+    case 'industry': return 'bg-emerald-100 text-emerald-800';
+    case 'agent': return 'bg-teal-100 text-teal-800';
+    case 'community': return 'bg-blue-100 text-blue-800';
+    case 'admin': return 'bg-purple-100 text-purple-800';
+    default: return 'bg-gray-100 text-gray-600';
+  }
+}
+
+export function Sidebar() {
+  const pathname = usePathname();
+  const { currentRole, userName, companyName, sidebarOpen, setSidebarOpen, logout } = useAppStore();
+
+  const navItems = getNavItems(currentRole);
+
+  return (
+    <>
+      {/* Mobile overlay */}
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black/40 z-30 lg:hidden"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
+      {/* Sidebar */}
+      <aside
+        className={cn(
+          'fixed left-0 top-0 bottom-0 z-40 flex flex-col bg-[#111b14] transition-all duration-300',
+          sidebarOpen ? 'w-60' : 'w-16',
+          'lg:relative lg:flex'
+        )}
+      >
+        {/* Logo */}
+        <div className="flex items-center gap-3 px-4 py-5 border-b border-white/10">
+          <div className="w-8 h-8 rounded-lg bg-emerald-500 flex items-center justify-center shrink-0">
+            <Zap className="h-4 w-4 text-white" />
+          </div>
+          {sidebarOpen && (
+            <div className="overflow-hidden">
+              <div className="text-white font-bold text-sm leading-tight whitespace-nowrap">
+                Geothermal
+              </div>
+              <div className="text-emerald-400 text-xs whitespace-nowrap">Community Hub</div>
+            </div>
+          )}
+          <button
+            onClick={() => setSidebarOpen(!sidebarOpen)}
+            className="ml-auto text-gray-400 hover:text-white transition-colors lg:block hidden"
+          >
+            {sidebarOpen ? <ChevronLeft className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
+          </button>
+          <button
+            onClick={() => setSidebarOpen(false)}
+            className="ml-auto text-gray-400 hover:text-white transition-colors lg:hidden"
+          >
+            <X className="h-4 w-4" />
+          </button>
+        </div>
+
+        {/* User info */}
+        {sidebarOpen && currentRole && (
+          <div className="px-4 py-3 border-b border-white/10">
+            <div className="flex items-center gap-2.5">
+              <div className="w-8 h-8 rounded-full bg-emerald-600 flex items-center justify-center shrink-0">
+                <span className="text-white text-xs font-bold">
+                  {userName.charAt(0).toUpperCase()}
+                </span>
+              </div>
+              <div className="overflow-hidden">
+                <div className="text-white text-sm font-medium truncate">{userName}</div>
+                <span className={cn('text-xs px-1.5 py-0.5 rounded-full font-medium', getRoleColor(currentRole))}>
+                  {getRoleLabel(currentRole)}
+                </span>
+              </div>
+            </div>
+            {companyName && (
+              <div className="mt-2 text-gray-400 text-xs truncate">{companyName}</div>
+            )}
+          </div>
+        )}
+
+        {/* Nav items */}
+        <nav className="flex-1 px-2 py-4 overflow-y-auto">
+          <div className="space-y-0.5">
+            {navItems.map((item) => {
+              const isActive = pathname === item.href || pathname.startsWith(item.href + '/');
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={cn(
+                    'flex items-center gap-3 px-3 py-2 rounded-lg transition-all duration-150 group',
+                    isActive
+                      ? 'bg-emerald-600 text-white'
+                      : 'text-gray-400 hover:bg-white/10 hover:text-white'
+                  )}
+                  title={!sidebarOpen ? item.label : undefined}
+                >
+                  <span className={cn(
+                    'shrink-0 transition-colors',
+                    isActive ? 'text-white' : 'text-gray-400 group-hover:text-white'
+                  )}>
+                    {item.icon}
+                  </span>
+                  {sidebarOpen && (
+                    <span className="text-sm font-medium whitespace-nowrap">{item.label}</span>
+                  )}
+                </Link>
+              );
+            })}
+          </div>
+        </nav>
+
+        {/* Logout */}
+        <div className="px-2 py-3 border-t border-white/10">
+          <Link
+            href="/login"
+            onClick={logout}
+            className="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-400 hover:bg-white/10 hover:text-white transition-all duration-150 w-full"
+            title={!sidebarOpen ? 'Keluar' : undefined}
+          >
+            <LogOut className="h-4 w-4 shrink-0" />
+            {sidebarOpen && <span className="text-sm font-medium">Keluar</span>}
+          </Link>
+        </div>
+      </aside>
+    </>
+  );
+}
