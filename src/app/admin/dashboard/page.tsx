@@ -67,15 +67,15 @@ export default function AdminDashboard() {
               </CardHeader>
               <div className="divide-y divide-gray-50">
                 {pendingItems.map((item, i) => (
-                  <div key={i} className="px-6 py-4 flex items-center justify-between gap-4">
-                    <div className="flex items-center gap-3">
+                  <div key={i} className="p-4 sm:px-6 sm:py-4 flex items-center justify-between gap-3">
+                    <div className="flex items-center gap-3 min-w-0 flex-1">
                       <div className="w-2 h-2 rounded-full bg-amber-400 shrink-0" />
-                      <div>
-                        <div className="flex items-center gap-2">
-                          <span className="text-xs bg-gray-100 text-gray-600 px-1.5 py-0.5 rounded font-medium">{item.type}</span>
-                          <span className="text-sm font-medium text-gray-900">{item.title}</span>
+                      <div className="min-w-0 flex-1">
+                        <div className="flex flex-wrap items-center gap-2">
+                          <span className="text-xs bg-gray-100 text-gray-600 px-1.5 py-0.5 rounded font-medium shrink-0">{item.type}</span>
+                          <span className="text-sm font-medium text-gray-900 truncate">{item.title}</span>
                         </div>
-                        <div className="text-xs text-gray-500 mt-0.5">{item.company} · {item.time}</div>
+                        <div className="text-xs text-gray-500 mt-0.5 truncate">{item.company} · {item.time}</div>
                       </div>
                     </div>
                     <div className="flex gap-2 shrink-0">

@@ -23,7 +23,7 @@ export default function AdminModerationPage() {
   return (
     <DashboardLayout title="Moderasi">
       <div className="space-y-6">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
           <div>
             <h1 className="text-2xl font-bold text-gray-900">Moderasi Konten</h1>
             <p className="text-gray-500 mt-1">Review dan setujui konten yang dikirimkan ke platform.</p>
@@ -32,7 +32,7 @@ export default function AdminModerationPage() {
         </div>
 
         {/* Tabs */}
-        <div className="flex gap-2 border-b border-gray-200">
+        <div className="flex gap-2 border-b border-gray-200 overflow-x-auto pb-px">
           {tabs.map(tab => (
             <button
               key={tab.key}
