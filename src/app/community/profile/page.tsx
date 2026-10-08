@@ -35,16 +35,17 @@ export default function CommunityProfilePage() {
   return (
     <DashboardLayout title="Profil Saya">
       <div className="max-w-3xl space-y-6">
-        <div className="flex items-center justify-between">
-          <h1 className="text-2xl font-bold text-gray-900">Profil Saya</h1>
-          <div className="flex items-center gap-3">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <h1 className="text-xl sm:text-2xl font-bold text-gray-900">Profil Saya</h1>
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3">
             <DemoBadge />
             {saved && (
-              <span className="flex items-center gap-1 text-emerald-600 text-sm font-medium">
+              <span className="flex items-center gap-1 text-emerald-600 text-xs sm:text-sm font-medium">
                 <CheckCircle className="h-4 w-4" /> Tersimpan (Demo)
               </span>
             )}
             <Button
+              size="sm"
               variant={editing ? 'primary' : 'outline'}
               onClick={editing ? handleSave : () => setEditing(true)}
             >
