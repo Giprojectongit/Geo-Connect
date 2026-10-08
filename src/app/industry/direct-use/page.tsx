@@ -161,30 +161,30 @@ export default function DirectUsePage() {
 
           {/* Results Panel */}
           <div className="lg:col-span-3 space-y-4">
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
               <div>
                 <h2 className="font-semibold text-gray-800">Rekomendasi Peluang</h2>
                 <p className="text-xs text-gray-500">
                   {matchedOpportunities.length} peluang sesuai dengan parameter suhu {temperature}°C
                 </p>
               </div>
-              <span className="text-xs px-2 py-1 bg-blue-50 text-blue-700 border border-blue-200 rounded-full">
+              <span className="self-start sm:self-auto text-xs px-2.5 py-1 bg-blue-50 text-blue-700 border border-blue-200 rounded-full shrink-0">
                 <Info className="h-3 w-3 inline mr-1" />
-                Opportunity Matching Engine (Simulasi)
+                Matching Engine (Simulasi)
               </span>
             </div>
 
             {matchedOpportunities.map((opp) => (
               <Card key={opp.id} hover>
-                <CardContent className="p-5">
-                  <div className="flex items-start gap-4">
-                    <div className="text-3xl shrink-0">{categoryIcons[opp.category]}</div>
-                    <div className="flex-1">
-                      <div className="flex items-center gap-2 mb-1">
+                <CardContent className="p-4 sm:p-5">
+                  <div className="flex flex-col sm:flex-row items-start gap-3 sm:gap-4">
+                    <div className="text-3xl shrink-0 p-2 bg-gray-50 rounded-lg">{categoryIcons[opp.category]}</div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex flex-wrap items-center gap-2 mb-1">
                         <h3 className="font-semibold text-gray-900">{opp.title}</h3>
                         <StatusBadge status={opp.status} />
                       </div>
-                      <div className="flex items-center gap-3 text-xs text-gray-500 mb-2">
+                      <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-xs text-gray-500 mb-2">
                         <span className="flex items-center gap-1">
                           <Thermometer className="h-3 w-3" />
                           {opp.temperatureRange}
@@ -209,9 +209,9 @@ export default function DirectUsePage() {
                         ))}
                       </div>
 
-                      <div className="mt-3 flex items-center justify-between">
+                      <div className="mt-3 pt-3 border-t border-gray-100 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                         <span className="text-xs text-emerald-600 font-medium">{opp.potentialImpact}</span>
-                        <Button size="sm" variant="outline">
+                        <Button size="sm" variant="outline" className="self-start sm:self-auto">
                           Pelajari Lebih <ChevronRight className="h-3.5 w-3.5" />
                         </Button>
                       </div>

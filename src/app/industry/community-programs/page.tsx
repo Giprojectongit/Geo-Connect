@@ -22,30 +22,30 @@ export default function CommunityProgramsPage() {
   return (
     <DashboardLayout title="Program Komunitas">
       <div className="space-y-6">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">Program Komunitas</h1>
-            <p className="text-gray-500 mt-1">Kelola seluruh program pemberdayaan komunitas lokal.</p>
+            <h1 className="text-xl sm:text-2xl font-bold text-gray-900">Program Komunitas</h1>
+            <p className="text-xs sm:text-sm text-gray-500 mt-1">Kelola seluruh program pemberdayaan komunitas lokal.</p>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3">
             <DemoBadge />
-            <Button>
+            <Button size="sm">
               <Plus className="h-4 w-4" /> Buat Program
             </Button>
           </div>
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
           {[
             { label: 'Total Program', value: mockCommunityPrograms.length, color: 'text-gray-900' },
             { label: 'Aktif', value: mockCommunityPrograms.filter(p => p.status === 'active').length, color: 'text-emerald-600' },
             { label: 'Total Target', value: mockCommunityPrograms.reduce((s, p) => s + p.targetParticipants, 0), color: 'text-teal-600' },
             { label: 'Peserta Saat Ini', value: mockCommunityPrograms.reduce((s, p) => s + p.currentParticipants, 0), color: 'text-blue-600' },
           ].map((s) => (
-            <div key={s.label} className="text-center p-3 bg-white rounded-lg border border-gray-200">
-              <div className={`text-2xl font-bold ${s.color}`}>{s.value}</div>
-              <div className="text-xs text-gray-500">{s.label}</div>
+            <div key={s.label} className="text-center p-3.5 sm:p-4 bg-white rounded-xl border border-gray-200">
+              <div className={`text-xl sm:text-2xl font-bold ${s.color}`}>{s.value}</div>
+              <div className="text-xs text-gray-500 mt-0.5">{s.label}</div>
             </div>
           ))}
         </div>

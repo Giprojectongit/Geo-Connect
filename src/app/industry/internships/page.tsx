@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 export const dynamic = 'force-dynamic';
 
@@ -17,12 +17,14 @@ export default function IndustryInternshipsPage() {
   return (
     <DashboardLayout title="Program Internship">
       <div className="space-y-6">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">Program Internship</h1>
-            <p className="text-gray-500 mt-1">Kelola program magang untuk talenta lokal.</p>
+            <h1 className="text-xl sm:text-2xl font-bold text-gray-900">Program Internship</h1>
+            <p className="text-xs sm:text-sm text-gray-500 mt-1">Kelola program magang untuk talenta lokal.</p>
           </div>
-          <DemoBadge />
+          <div className="self-start">
+            <DemoBadge />
+          </div>
         </div>
 
         <div className="grid md:grid-cols-2 gap-4">

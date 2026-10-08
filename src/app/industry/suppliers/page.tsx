@@ -42,24 +42,26 @@ export default function IndustrySuppliersPage() {
   return (
     <DashboardLayout title="Supplier Lokal">
       <div className="space-y-6">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">Supplier Lokal</h1>
-            <p className="text-gray-500 mt-1">Jaringan vendor dan supplier dari komunitas sekitar area operasi.</p>
+            <h1 className="text-xl sm:text-2xl font-bold text-gray-900">Supplier Lokal</h1>
+            <p className="text-xs sm:text-sm text-gray-500 mt-1">Jaringan vendor dan supplier dari komunitas sekitar area operasi.</p>
           </div>
-          <DemoBadge />
+          <div className="self-start">
+            <DemoBadge />
+          </div>
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
           {[
             { label: 'Total Supplier', value: mockSuppliers.length, color: 'text-gray-900' },
             { label: 'Terverifikasi', value: mockSuppliers.filter(s => s.status === 'verified').length, color: 'text-emerald-600' },
             { label: 'Menunggu Verifikasi', value: mockSuppliers.filter(s => s.status === 'pending').length, color: 'text-amber-600' },
           ].map((s) => (
-            <div key={s.label} className="text-center p-3 bg-white rounded-lg border border-gray-200">
-              <div className={`text-2xl font-bold ${s.color}`}>{s.value}</div>
-              <div className="text-xs text-gray-500">{s.label}</div>
+            <div key={s.label} className="text-center p-3.5 sm:p-4 bg-white rounded-xl border border-gray-200">
+              <div className={`text-xl sm:text-2xl font-bold ${s.color}`}>{s.value}</div>
+              <div className="text-xs text-gray-500 mt-0.5">{s.label}</div>
             </div>
           ))}
         </div>

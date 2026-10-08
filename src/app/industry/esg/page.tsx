@@ -50,15 +50,17 @@ export default function ESGDashboardPage() {
             <div className="w-1 h-5 bg-emerald-600 rounded" />
             <h2 className="font-bold text-gray-800">Social Impact</h2>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
             {[
               { label: 'Peserta Pelatihan', value: metric.social.trainingParticipants, icon: <Users className="h-5 w-5" />, color: 'green' as const },
               { label: 'Rekrutan Lokal', value: metric.social.localHires, icon: <Users className="h-5 w-5" />, color: 'teal' as const },
               { label: 'Peserta Magang', value: metric.social.internshipParticipants, icon: <Users className="h-5 w-5" />, color: 'teal' as const },
               { label: 'Partisipasi Komunitas', value: metric.social.communityParticipation, icon: <Users className="h-5 w-5" />, color: 'green' as const },
               { label: 'Partisipasi Perempuan', value: `${metric.social.womenParticipation}%`, icon: <Users className="h-5 w-5" />, color: 'gold' as const },
-            ].map((s) => (
-              <StatCard key={s.label} label={s.label} value={s.value} icon={s.icon} color={s.color} />
+            ].map((s, i) => (
+              <div key={s.label} className={i === 4 ? "col-span-2 sm:col-span-1" : ""}>
+                <StatCard label={s.label} value={s.value} icon={s.icon} color={s.color} />
+              </div>
             ))}
           </div>
         </div>
@@ -69,7 +71,7 @@ export default function ESGDashboardPage() {
             <div className="w-1 h-5 bg-teal-600 rounded" />
             <h2 className="font-bold text-gray-800">Economic Impact</h2>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
             {[
               { label: 'Supplier Lokal', value: metric.economic.localSuppliers, icon: <Building2 className="h-5 w-5" />, color: 'green' as const },
               { label: 'UMKM Didukung', value: metric.economic.umkmSupported, icon: <Building2 className="h-5 w-5" />, color: 'teal' as const },
@@ -87,7 +89,7 @@ export default function ESGDashboardPage() {
             <div className="w-1 h-5 bg-amber-500 rounded" />
             <h2 className="font-bold text-gray-800">Energy Impact</h2>
           </div>
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
             {[
               { label: 'Proyek Direct-Use', value: metric.energy.directUseProjects, icon: <Zap className="h-5 w-5" />, color: 'gold' as const },
               { label: 'Aplikasi Geothermal', value: metric.energy.geothermalApplications, icon: <Zap className="h-5 w-5" />, color: 'teal' as const },

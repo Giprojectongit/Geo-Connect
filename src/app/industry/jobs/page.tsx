@@ -79,15 +79,15 @@ export default function IndustryJobsPage() {
         </Card>
 
         {/* Stats */}
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
           {[
             { label: 'Total Lowongan', value: mockJobs.length, color: 'text-gray-900' },
             { label: 'Dibuka', value: mockJobs.filter(j => j.status === 'open').length, color: 'text-emerald-600' },
             { label: 'Total Pelamar', value: mockJobs.reduce((s, j) => s + j.applicants, 0), color: 'text-blue-600' },
           ].map((s) => (
-            <div key={s.label} className="text-center p-3 bg-white rounded-lg border border-gray-200">
-              <div className={`text-2xl font-bold ${s.color}`}>{s.value}</div>
-              <div className="text-xs text-gray-500">{s.label}</div>
+            <div key={s.label} className="text-center p-3.5 sm:p-4 bg-white rounded-xl border border-gray-200">
+              <div className={`text-xl sm:text-2xl font-bold ${s.color}`}>{s.value}</div>
+              <div className="text-xs text-gray-500 mt-0.5">{s.label}</div>
             </div>
           ))}
         </div>
@@ -114,7 +114,7 @@ export default function IndustryJobsPage() {
         {/* Simple Create Modal */}
         {showCreateModal && (
           <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4">
-            <div className="bg-white rounded-2xl w-full max-w-lg p-6">
+            <div className="bg-white rounded-2xl w-full max-w-lg p-5 sm:p-6 max-h-[90vh] overflow-y-auto">
               <h3 className="text-lg font-bold text-gray-900 mb-4">Buat Lowongan Baru</h3>
               <div className="space-y-4">
                 <div>
