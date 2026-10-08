@@ -18,12 +18,14 @@ export default function AgentPlacementsPage() {
   return (
     <DashboardLayout title="Tracking Penempatan">
       <div className="space-y-6">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">Tracking Penempatan</h1>
-            <p className="text-gray-500 mt-1">Pantau status lamaran anggota komunitas Anda.</p>
+            <h1 className="text-xl sm:text-2xl font-bold text-gray-900">Tracking Penempatan</h1>
+            <p className="text-xs sm:text-sm text-gray-500 mt-1">Pantau status lamaran anggota komunitas Anda.</p>
           </div>
-          <DemoBadge />
+          <div className="self-start">
+            <DemoBadge />
+          </div>
         </div>
         <Card>
           <div className="overflow-x-auto">

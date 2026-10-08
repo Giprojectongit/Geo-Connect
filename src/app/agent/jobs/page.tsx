@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 export const dynamic = 'force-dynamic';
 
@@ -12,7 +12,7 @@ export default function AgentJobsPage() {
   return (
     <DashboardLayout title="Lowongan">
       <div className="space-y-6">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
           <div>
             <h1 className="text-2xl font-bold text-gray-900">Informasi Lowongan</h1>
             <p className="text-gray-500 mt-1">Daftar lowongan yang dapat Anda rekomendasikan ke anggota komunitas.</p>

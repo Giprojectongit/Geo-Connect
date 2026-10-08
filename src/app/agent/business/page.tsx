@@ -9,7 +9,7 @@ export default function AgentBusinessPage() {
   return (
     <DashboardLayout title="Peluang Bisnis">
       <div className="space-y-6">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
           <h1 className="text-2xl font-bold text-gray-900">Peluang Bisnis & UMKM</h1>
           <DemoBadge />
         </div>
