@@ -33,7 +33,7 @@ export function TopNav({ title }: TopNavProps) {
 
       {/* Title */}
       {title && (
-        <div className="min-w-0">
+        <div className={cn("min-w-0", showSearch && "hidden sm:block")}>
           <h1 className="text-sm sm:text-base font-semibold text-gray-800 truncate max-w-35 sm:max-w-none">{title}</h1>
         </div>
       )}
@@ -88,48 +88,65 @@ export function TopNav({ title }: TopNavProps) {
         </button>
 
         {showNotifications && (
-          <div className="absolute right-0 top-full mt-2 w-[calc(100vw-2rem)] sm:w-80 max-w-sm bg-white border border-gray-200 rounded-xl shadow-xl z-50">
-            <div className="px-4 py-3 border-b border-gray-100 flex items-center justify-between">
-              <span className="font-semibold text-gray-800 text-sm">Notifikasi</span>
-              <button
-                onClick={() => setShowNotifications(false)}
-                className="text-xs text-emerald-600 hover:text-emerald-700 font-medium"
-              >
-                Tutup
-              </button>
-            </div>
-            <div className="divide-y divide-gray-50 max-h-80 overflow-y-auto">
-              {userNotifications.map((notif) => (
-                <div
-                  key={notif.id}
-                  className={cn(
-                    'px-4 py-3 hover:bg-gray-50 transition-colors',
-                    !notif.read && 'bg-emerald-50/50'
-                  )}
+          <>
+            {/* Mobile backdrop */}
+            <div
+              className="fixed inset-0 z-40 bg-black/25 sm:bg-transparent"
+              onClick={() => setShowNotifications(false)}
+              aria-hidden="true"
+            />
+            <div className="fixed inset-x-3 top-16 sm:absolute sm:inset-x-auto sm:right-0 sm:top-full sm:mt-2 sm:w-80 sm:max-w-sm bg-white border border-gray-200 rounded-xl shadow-xl z-50">
+              <div className="px-4 py-3 border-b border-gray-100 flex items-center justify-between">
+                <span className="font-semibold text-gray-800 text-sm">Notifikasi</span>
+                <button
+                  onClick={() => setShowNotifications(false)}
+                  className="text-xs text-emerald-600 hover:text-emerald-700 font-medium p-1 -mr-1"
                 >
-                  <div className="flex items-start gap-3">
-                    <div className={cn(
-                      'w-2 h-2 rounded-full mt-1.5 shrink-0',
-                      notif.type === 'opportunity' && 'bg-emerald-500',
-                      notif.type === 'success' && 'bg-teal-500',
-                      notif.type === 'info' && 'bg-blue-500',
-                      notif.type === 'warning' && 'bg-amber-500',
-                    )} />
-                    <div>
-                      <p className="text-sm font-medium text-gray-800">{notif.title}</p>
-                      <p className="text-xs text-gray-500 mt-0.5">{notif.message}</p>
-                      <p className="text-xs text-gray-400 mt-1">{formatShortDate(notif.createdAt)}</p>
-                    </div>
+                  Tutup
+                </button>
+              </div>
+              <div className="divide-y divide-gray-50 max-h-80 sm:max-h-96 overflow-y-auto">
+                {userNotifications.length === 0 ? (
+                  <div className="p-6 text-center text-gray-400 text-xs">
+                    Tidak ada notifikasi baru
                   </div>
-                </div>
-              ))}
+                ) : (
+                  userNotifications.map((notif) => (
+                    <div
+                      key={notif.id}
+                      className={cn(
+                        'px-4 py-3 hover:bg-gray-50 transition-colors',
+                        !notif.read && 'bg-emerald-50/40'
+                      )}
+                    >
+                      <div className="flex items-start gap-3">
+                        <div className={cn(
+                          'w-2.5 h-2.5 rounded-full mt-1.5 shrink-0',
+                          notif.type === 'opportunity' && 'bg-emerald-500',
+                          notif.type === 'success' && 'bg-teal-500',
+                          notif.type === 'info' && 'bg-blue-500',
+                          notif.type === 'warning' && 'bg-amber-500',
+                        )} />
+                        <div className="min-w-0 flex-1">
+                          <p className="text-sm font-medium text-gray-800 wrap-break-word leading-snug">{notif.title}</p>
+                          <p className="text-xs text-gray-500 mt-1 wrap-break-word leading-relaxed">{notif.message}</p>
+                          <p className="text-[11px] text-gray-400 mt-1">{formatShortDate(notif.createdAt)}</p>
+                        </div>
+                      </div>
+                    </div>
+                  ))
+                )}
+              </div>
+              <div className="px-4 py-2.5 border-t border-gray-100 bg-gray-50/50 rounded-b-xl">
+                <button
+                  onClick={() => setShowNotifications(false)}
+                  className="text-xs text-emerald-600 hover:text-emerald-700 font-medium w-full text-center py-1"
+                >
+                  Tandai semua sudah dibaca
+                </button>
+              </div>
             </div>
-            <div className="px-4 py-3 border-t border-gray-100">
-              <button className="text-xs text-emerald-600 hover:text-emerald-700 font-medium w-full text-center">
-                Lihat semua notifikasi
-              </button>
-            </div>
-          </div>
+          </>
         )}
       </div>
 
